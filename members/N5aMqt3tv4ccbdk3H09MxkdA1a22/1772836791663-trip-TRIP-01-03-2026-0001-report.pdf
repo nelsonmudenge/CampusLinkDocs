@@ -1,0 +1,426 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Trip Report - TRIP-01-03-2026-0001</title>
+  <style>
+    @page {
+      margin: 50px;
+      size: A4;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      font-size: 12px;
+      line-height: 1.4;
+      color: #333;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    .content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .header {
+      text-align: center;
+      margin-bottom: 30px;
+      border-bottom: 2px solid #1e40af;
+      padding-bottom: 20px;
+    }
+    .header-logo {
+      max-width: 200px;
+      height: auto;
+    }
+    .footer {
+      text-align: center;
+      margin-top: auto;
+      border-top: 2px solid #1e40af;
+      padding-top: 20px;
+      position: relative;
+      bottom: 0;
+    }
+    .footer-logo {
+      max-width: 90%;
+      width: 90%;
+      height: auto;
+      margin-bottom: 10px;
+    }
+    .section {
+      background: #f8fafc;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 30px;
+    }
+    .section-title {
+      font-size: 18px;
+      font-weight: bold;
+      color: #1e40af;
+      margin-bottom: 15px;
+      border-bottom: 1px solid #e5e7eb;
+      padding-bottom: 10px;
+    }
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+      margin-bottom: 15px;
+    }
+    .info-item {
+      padding: 12px;
+      background: #ffffff;
+      border-radius: 6px;
+      border-left: 4px solid #3b82f6;
+    }
+    .info-label {
+      font-size: 12px;
+      color: #64748b;
+      font-weight: 600;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .info-value {
+      font-size: 14px;
+      font-weight: 600;
+      color: #1e293b;
+    }
+    .info-value.empty {
+      color: #94a3b8;
+      font-style: italic;
+    }
+    .table, .overview-table, .time-table, .fuel-table, .expenses-table, .timeline-table, .issues-table {
+      width: 100% !important;
+      border-collapse: collapse !important;
+      margin-top: 10px !important;
+      border: 1px solid #e5e7eb !important;
+    }
+    .table th, .overview-table th, .time-table th, .fuel-table th, .expenses-table th, .timeline-table th, .issues-table th {
+      background: #b7d62f !important;
+      color: white !important;
+      font-weight: bold !important;
+      padding: 12px 8px !important;
+      text-align: left !important;
+      border: 1px solid #e5e7eb !important;
+      font-size: 12px !important;
+      text-transform: uppercase !important;
+    }
+    .table td, .overview-table td, .time-table td, .fuel-table td, .expenses-table td, .timeline-table td, .issues-table td {
+      padding: 10px 8px !important;
+      border: 1px solid #e5e7eb !important;
+      text-align: left !important;
+      font-size: 12px !important;
+    }
+    .table tr:nth-child(even), .overview-table tr:nth-child(even), .time-table tr:nth-child(even), .fuel-table tr:nth-child(even), .expenses-table tr:nth-child(even), .timeline-table tr:nth-child(even), .issues-table tr:nth-child(even) {
+      background: #f8fafc !important;
+    }
+    .table tr:nth-child(odd), .overview-table tr:nth-child(odd), .time-table tr:nth-child(odd), .fuel-table tr:nth-child(odd), .expenses-table tr:nth-child(odd), .timeline-table tr:nth-child(odd), .issues-table tr:nth-child(odd) {
+      background: #ffffff !important;
+    }
+    .table tr:hover, .overview-table tr:hover, .time-table tr:hover, .fuel-table tr:hover, .expenses-table tr:hover, .timeline-table tr:hover, .issues-table tr:hover {
+      background: #f1f5f9 !important;
+    }
+    
+    /* More specific for overview table */
+    .overview-table {
+      border: 2px solid #e5e7eb !important;
+    }
+    .overview-table th {
+      background: #b7d62f !important;
+      color: white !important;
+      font-weight: bold !important;
+      border: 1px solid #e5e7eb !important;
+    }
+    .overview-table td {
+      border: 1px solid #e5e7eb !important;
+    }
+    .overview-table tr:nth-child(even) {
+      background: #f8fafc !important;
+    }
+    .overview-table tr:nth-child(odd) {
+      background: #ffffff !important;
+    }
+    .signature-section {
+      background: #ffffff;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+    .signature-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      margin-top: 15px;
+    }
+    .signature-field {
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .signature-label {
+      font-size: 12px;
+      font-weight: bold;
+      color: #374151;
+      margin-bottom: 0;
+      white-space: nowrap;
+    }
+    .signature-value {
+      font-size: 14px;
+      color: #1f2937;
+      border-bottom: 1px solid #d1d5db;
+      padding: 4px 0;
+      flex: 1;
+    }
+    .signature-line {
+      height: 40px;
+      border-bottom: 1px dashed #9ca3af;
+      margin-top: 5px;
+      font-size: 11px;
+      color: #6b7280;
+      text-align: center;
+      padding-top: 20px;
+    }
+    .user-info {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      font-size: 10px;
+      color: #6b7280;
+      background: #f9fafb;
+      padding: 8px;
+      border-radius: 4px;
+      border: 1px solid #e5e7eb;
+    }
+    @media print {
+      .no-print {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="content">
+    <!-- Header with Logo and Company Info -->
+    <div class="header">
+      <img src="/logos/Value Logistics Logs forms top.png" alt="Value Logistics" class="header-logo" />
+      <div style="margin-top: 15px; text-align: center;">
+        <h2 style="margin: 0; font-size: 20px; color: #1e40af; font-weight: bold;">VALUE LOGISTICS PLATFORM</h2>
+        <p style="margin: 5px 0 0 0; font-size: 14px; color: #6b7280;">Trip Management System</p>
+        <p style="margin: 5px 0 0 0; font-size: 12px; color: #9ca3af;">Role: Operations | Trip Report Generation</p>
+        <p style="margin: 10px 0 0 0; font-size: 11px; color: #64748b; font-weight: 500;">Generated on March 1, 2026 at 12:44 AM</p>
+      </div>
+    </div>
+
+        <div class="content">
+            <!-- Trip Overview Table -->
+            <div class="section">
+                <h2 class="section-title">Trip Overview</h2>
+                <table class="overview-table">
+                    <tr>
+                        <td class="label">Trip ID</td>
+                        <td class="value">TRIP-01-03-2026-0001</td>
+                        <td class="label">Status</td>
+                        <td class="value">
+                            <span class="status-badge status-planned">
+                                PLANNED
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="label">Route Name</td>
+                        <td class="value ">Kigali To Mombasa</td>
+                        <td class="label">Expected Hours</td>
+                        <td class="value empty">Not specified</td>
+                    </tr>
+                    <tr>
+                        <td class="label">Origin</td>
+                        <td class="value ">Kigali</td>
+                        <td class="label">Destination</td>
+                        <td class="value ">Mombasa</td>
+                    </tr>
+                    <tr>
+                        <td class="label">Truck Plate</td>
+                        <td class="value ">RAD 067 P</td>
+                        <td class="label">Truck Type</td>
+                        <td class="value ">Trailer 40ft</td>
+                    </tr>
+                    <tr>
+                        <td class="label">Driver Name</td>
+                        <td class="value ">Driver One</td>
+                        <td class="label">Driver License</td>
+                        <td class="value empty">Not specified</td>
+                    </tr>
+                    <tr>
+                        <td class="label">Driver Contact</td>
+                        <td class="value ">+250790127656</td>
+                        <td class="label">Cargo Type</td>
+                        <td class="value empty">Not specified</td>
+                    </tr>
+                    <tr>
+                        <td class="label">Start Time</td>
+                        <td class="value ">April 1, 2026 at 05:09 AM</td>
+                        <td class="label">End Time</td>
+                        <td class="value ">April 2, 2026 at 11:09 AM</td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- Time Analysis Table -->
+            <div class="section">
+                <h2 class="section-title">Time Analysis</h2>
+                <table class="time-table">
+                    <thead>
+                        <tr>
+                            <th>Metric</th>
+                            <th>Time</th>
+                            <th>Percentage</th>
+                            <th>Accuracy vs Planned</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="metric-label">Total Time</td>
+                            <td class="time-value">30h 0m</td>
+                            <td class="percentage">100%</td>
+                            <td class="accuracy good">On Track</td>
+                        </tr>
+                        <tr>
+                            <td class="metric-label">Working Time</td>
+                            <td class="time-value">28h 0m</td>
+                            <td class="percentage">93%</td>
+                            <td class="accuracy good">Active</td>
+                        </tr>
+                        <tr>
+                            <td class="metric-label">Stopped Time</td>
+                            <td class="time-value">2h 0m</td>
+                            <td class="percentage">7%</td>
+                            <td class="accuracy good">Optimal</td>
+                        </tr>
+                        <tr class="duration-row">
+                            <td class="metric-label"><strong>Duration (Total - Stopped)</strong></td>
+                            <td class="time-value"><strong>28h 0m</strong></td>
+                            <td class="percentage"><strong>93%</strong></td>
+                            <td class="accuracy excellent"><strong>Excellent</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Fuel Analysis Table -->
+            <div class="section">
+                <h2 class="section-title">Fuel Analysis</h2>
+                <table class="fuel-table">
+                    <thead>
+                        <tr>
+                            <th>Metric</th>
+                            <th>Value</th>
+                            <th>Rate</th>
+                            <th>Cost</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="metric-label">Fuel Used</td>
+                            <td class="fuel-value">0L</td>
+                            <td class="rate">0.0L/h</td>
+                            <td class="cost">$0.00</td>
+                        </tr>
+                        <tr>
+                            <td class="metric-label">Cost per Liter</td>
+                            <td class="fuel-value">$1.45</td>
+                            <td class="rate">-</td>
+                            <td class="cost">-</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Expenses Table -->
+            <div class="section">
+                <h2 class="section-title">Expenses Breakdown</h2>
+                <div class="empty-state">No expenses recorded for this trip</div>
+            </div>
+
+            <!-- Trip Timeline Table -->
+            <div class="section">
+                <h2 class="section-title">Trip Timeline</h2>
+                <table class="timeline-table">
+                    <thead>
+                        <tr>
+                            <th>Time</th>
+                            <th>Event</th>
+                            <th>Location</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="timeline-time">April 1, 2026 at 05:09 AM</td>
+                            <td class="timeline-event">Trip Started</td>
+                            <td class="timeline-location">Origin</td>
+                            <td class="timeline-description">Departed from origin</td>
+                        </tr>
+                        
+                            <tr>
+                                <td class="timeline-time">March 1, 2026 at 12:35 AM</td>
+                                <td class="timeline-event">COMMENT</td>
+                                <td class="timeline-location">-</td>
+                                <td class="timeline-description">Waiting for this trip</td>
+                            </tr>
+                        
+                        
+                        <tr>
+                            <td class="timeline-time">April 2, 2026 at 11:09 AM</td>
+                            <td class="timeline-event">Trip Completed</td>
+                            <td class="timeline-location">Destination</td>
+                            <td class="timeline-description">Arrived at destination</td>
+                        </tr>
+                        
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Issues and Maintenance Table -->
+            <div class="section">
+                <h2 class="section-title">Issues & Maintenance</h2>
+                <div class="empty-state">No issues reported for this trip</div>
+            </div>
+        </div>
+
+        <!-- Signature Section -->
+        <div class="signature-section">
+            <div class="signature-grid">
+                <div>
+                    <div class="signature-field">
+                        <div class="signature-label">Name:</div>
+                        <div class="signature-value">Operation One</div>
+                    </div>
+                    <div class="signature-field">
+                        <div class="signature-label">Role:</div>
+                        <div class="signature-value">OPS_MANAGER</div>
+                    </div>
+                    <div class="signature-field">
+                        <div class="signature-label">Tel:</div>
+                        <div class="signature-value">Not Available</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="signature-field">
+                        <div class="signature-label">Signature:</div>
+                        <div class="signature-line">……………………..</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <img src="/logos/forms footer Addess.png" alt="Value Logistics Footer" class="footer-logo" onerror="this.style.display='none'">
+        </div>
+    </div>
+</body>
+</html>
+  
